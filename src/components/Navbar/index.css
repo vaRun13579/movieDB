@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px;
+  align-items: center;
+  /* border: solid white 1px; */
+}
+.nav-heading {
+  color: gold;
+  font-size:40px;
+}
+.nav-items-container {
+  display: flex;
+  list-style-type: none;
+  padding: 0px;
+  gap: 10px;
+}
+
+.nav-buttons {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  background-color: transparent;
+  border: none;
+}

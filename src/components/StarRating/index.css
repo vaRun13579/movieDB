@@ -1,0 +1,15 @@
+.rating {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: fit-content;
+  display: inline-block;
+  background: linear-gradient(
+    to right,
+    #c69806 0%,
+    #c69806 var(--rating),
+    silver var(--rating),
+    silver 100%
+  );
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}

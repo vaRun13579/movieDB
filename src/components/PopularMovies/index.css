@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto';
+  margin: 0px;
+}
+
+.main-container {
+  min-height: 100dvh;
+  padding: 20px;
+  background-color: #0f0f0f;
+}
+
+.section-heading {
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+  gap: 10px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.fail-safe-state {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fail-state-heading {
+  color: #1c6ff3;
+}
+
+.fail-state-para {
+  color: rgb(36, 110, 249);
+}
+.fail-state-button {
+  color: rgb(216, 187, 132);
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 700;
+  border-color: rgb(89, 59, 3);
+  padding: 10px 20px;
+  background-image: radial-gradient(
+    rgb(158, 103, 0),
+    rgb(174, 124, 32),
+    rgb(208, 170, 99)
+  );
+  border-radius: 10px;
+}
+
+/* * {
+  border: solid 0.5px blue;
+} */
+
+.success-page-container {
+  padding: 10px 10px;
+  /* border: solid 2px white; */
+}
+
+.success-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0px;
+  gap: 20px;
+}
+
+.movie-poster-item {
+  border-radius: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+.img-placeholder {
+  aspect-ratio: 21/32;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: radial-gradient( #999a9d 10%, #0d0c0f 90%); */
+  background-image: linear-gradient(135deg, #0d0c0f 10%, #999a9d, #0d0c0f 90%);
+  box-shadow: inset 0.5px 0.5px 2px 1px #999a9d;
+}
+
+.movie-poster {
+  width: 100%;
+}
+.movie-poster-details {
+  padding: 5px 20px;
+}
+.movie-name {
+  color: white;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: default;
+  margin-bottom: 3px;
+}
+.movie-rating {
+  color: gold;
+  font-size: 15px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.movie-details-button {
+  color: black;
+  background-image: linear-gradient(175deg, #ecf5b7, #f4de83, #d9b74e);
+  border: none;
+  font-size: 10px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  display: block;
+  margin-top: 3px;
+  /* filter: brightness(0.5); */
+}
+.movie-details-button:hover {
+  box-shadow: inset -2px -3px 3px #f7efc8;
+}
+
+.page-control-container {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.page-count-buttons {
+  background-color: #efe807;
+  color: black;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: rgb(124, 110, 11) solid;
+}
+.page-count {
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+}
