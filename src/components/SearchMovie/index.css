@@ -17,14 +17,14 @@
   padding: 20px;
   flex-grow: 1;
   border: none;
-  font-size:14px;
-  color:white;
+  font-size: 14px;
+  color: white;
   border-right: solid 2px rgb(192, 192, 192, 0.2);
 }
 
-.search-bar::placeholder{
-  color:#d5d5d5;
-  font-size:13px;
+.search-bar::placeholder {
+  color: #d5d5d5;
+  font-size: 13px;
 }
 
 .search-bar-container {
@@ -41,14 +41,14 @@
   align-self: stretch;
   color: yellow;
   border: none;
-  font-size:10px;
+  font-size: 10px;
   font-weight: 600;
   background-color: #0f0f0f;
 }
 
-.default-msg-container{
-  color:#a8a5a5;
-  font-size:20px;
+.default-msg-container {
+  color: #a8a5a5;
+  font-size: 20px;
   font-weight: 700;
   text-align: center;
 }

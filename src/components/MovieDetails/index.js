@@ -1,6 +1,7 @@
 import {useLocation} from 'react-router-dom'
 import {useContext, useState, useEffect} from 'react'
 import Apicontext from '../../apiContext'
+import CastDetails from '../CastDetails'
 import Loader from '../Loader'
 import Navbar from '../Navbar'
 import formateObj from '../../snakeToCamelCase'
@@ -11,6 +12,7 @@ const pageStateList = ['loading', 'success', 'fail']
 export default () => {
   const [movieDetails, setMovieDetails] = useState({})
   const [pageState, setPageState] = useState(pageStateList[0])
+  const [castDetailsList, setCastDetails] = useState([])
   const {apiKey, imgUrl} = useContext(Apicontext)
   const location = useLocation()
   const movieId = location.pathname.slice(14)
@@ -54,6 +56,17 @@ export default () => {
     )
   }
 
+  async function fetchCastDetails() {
+    const castUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`
+    const response = await fetch(castUrl)
+    const data = await response.json()
+    if (response.ok) {
+      setCastDetails(data.cast)
+    } else {
+      console.log('Something went wrong with cast details loading')
+    }
+  }
+
   function SuccessState() {
     console.log(movieDetails)
     const {
@@ -94,7 +107,8 @@ export default () => {
             </div>
             <div className="movie-popular-container">
               <p className="detail-of-movie">
-                <span className="label-heading">Rating:</span> {voteAverage}/10
+                <span className="label-heading">Rating:</span> {voteAverage}
+                /10
               </p>
               <p className="detail-of-movie">
                 <span className="label-heading">Votes: </span> {voteCount * 100}
@@ -168,6 +182,25 @@ export default () => {
               >
                 Click here for IMDB rating
               </a>
+
+              <div className="cast-crew-main-container">
+                <h3 className="cast-heading">Cast & Crew</h3>
+                {castDetailsList.length > 0 && (
+                  <ul className="cast-items-container">
+                    {castDetailsList.map(item => (
+                      <CastDetails
+                        key={item.id}
+                        castDetails={formateObj(item)}
+                      />
+                    ))}
+                    {castDetailsList.length === 0 && (
+                      <div className="cast-items-container">
+                        <p>No Cast and Crew has listed ...</p>
+                      </div>
+                    )}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -177,6 +210,10 @@ export default () => {
 
   useEffect(() => {
     fetchData()
+  }, [])
+
+  useEffect(() => {
+    fetchCastDetails()
   }, [])
 
   return (

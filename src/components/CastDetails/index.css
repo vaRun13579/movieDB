@@ -1,0 +1,24 @@
+.profile-list-item {
+  width: 150px;
+  border-radius: 8px;
+  overflow: hidden;
+  /* border: solid white; */
+}
+
+.profile-pic {
+  width: 100%;
+  aspect-ratio: 4/5;
+}
+.character-name {
+  color: aliceblue;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.original-name {
+  color: yellow;
+  font-size: 10px;
+}
+.department {
+  color: gray;
+  font-size: 10px;
+}
