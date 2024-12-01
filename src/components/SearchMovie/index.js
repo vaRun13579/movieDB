@@ -39,6 +39,7 @@ export default () => {
   useEffect(() => {
     fetchData()
     console.log('data is trying to fetch')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
