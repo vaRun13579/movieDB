@@ -1,5 +1,5 @@
 .profile-list-item {
-  width: 150px;
+  width: 130px;
   border-radius: 8px;
   overflow: hidden;
   /* border: solid white; */
@@ -21,4 +21,10 @@
 .department {
   color: gray;
   font-size: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .profile-list-item {
+    width: 90px;
+  }
 }

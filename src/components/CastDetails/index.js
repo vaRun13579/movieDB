@@ -14,8 +14,7 @@ export default ({castDetails}) => {
   } = castDetails
   const {imgUrl} = useContext(Apicontext)
   const [imgState, setImgState] = useState('loading')
-  console.log('cast image:', imgUrl.concat(profilePath))
-  console.log(castDetails)
+
   return (
     <li className="profile-list-item">
       {imgState === 'loading' && (

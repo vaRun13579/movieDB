@@ -5,9 +5,14 @@ import StarRating from '../StarRating'
 import './index.css'
 
 function Poster({obj, navigate}) {
-  const {posterPath, originalTitle, voteAverage, id} = obj
+  const {posterPath, originalTitle, voteAverage, id, backdropPath} = obj
   const [isLoad, setLoadValue] = useState(true)
+  // const [deviceWidth, setDeviceWidth] = useState(window.innerWidth)
   const {imgUrl} = useContext(Apicontext)
+  // window.addEventListener('resize', () => {
+  //   setDeviceWidth(window.innerWidth)
+  //   console.log(`Updated viewport width: ${deviceWidth}px`)
+  // })
 
   return (
     <li className="movie-poster-item">
@@ -31,6 +36,8 @@ function Poster({obj, navigate}) {
         <StarRating rating={voteAverage * 10} size={15} />
         <button
           className="movie-details-button"
+          type="button"
+          aria-label="view details"
           onClick={() => {
             navigate(`/moviedetails/${id}`)
           }}

@@ -37,6 +37,8 @@ function PopularMovies() {
         <p className="fail-state-para">Please try again...</p>
         <button
           className="fail-state-button"
+          type="button"
+          aria-label="retry"
           onClick={() => {
             fetchData()
           }}
@@ -61,6 +63,8 @@ function PopularMovies() {
           {pageCount > 1 && (
             <button
               className="page-count-buttons"
+              type="button"
+              aria-label="pre page"
               onClick={() => {
                 setPageCount(ps => {
                   if (ps === 1) {
@@ -76,6 +80,8 @@ function PopularMovies() {
           <p className="page-count">{pageCount}</p>
           <button
             className="page-count-buttons"
+            type="button"
+            aria-label="nxt page"
             onClick={() => {
               setPageCount(ps => ps + 1)
             }}

@@ -1,5 +1,6 @@
 import {useLocation} from 'react-router-dom'
 import {useContext, useState, useEffect} from 'react'
+import StarRating from '../StarRating'
 import Apicontext from '../../apiContext'
 import CastDetails from '../CastDetails'
 import Loader from '../Loader'
@@ -12,10 +13,16 @@ const pageStateList = ['loading', 'success', 'fail']
 export default () => {
   const [movieDetails, setMovieDetails] = useState({})
   const [pageState, setPageState] = useState(pageStateList[0])
+  const [deviceWidth, setWidth] = useState(window.innerWidth)
   const [castDetailsList, setCastDetails] = useState([])
   const {apiKey, imgUrl} = useContext(Apicontext)
   const location = useLocation()
   const movieId = location.pathname.slice(14)
+
+  window.addEventListener('resize', () => {
+    setWidth(window.innerWidth)
+    console.log('current device width is', window.innerWidth)
+  })
 
   const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
   console.log(url)
@@ -45,6 +52,8 @@ export default () => {
         <p className="fail-state-para">Please try again...</p>
         <button
           className="fail-state-button"
+          type="button"
+          aria-label="retry"
           onClick={() => {
             fetchData()
           }}
@@ -72,11 +81,11 @@ export default () => {
     const {
       backdropPath,
       budget,
-      homepage,
+      // homepage,
       imdbId,
-      belongsToCollection,
+      // belongsToCollection,
       genres,
-      id,
+      // id,
       originCountry,
       originalTitle,
       overview,
@@ -86,121 +95,125 @@ export default () => {
       releaseDate,
       revenue,
       runtime,
-      spokenLanguages,
+      // spokenLanguages,
       status,
       tagline,
       title,
       voteAverage,
       voteCount,
     } = movieDetails
+
     const bgUrl = imgUrl.concat(backdropPath)
+    function MovieDetailsContainer({addClass}) {
+      return (
+        <div className={`movie-popular-container ${addClass}`}>
+          <p className="detail-of-movie">
+            <span className="label-heading">Rating:</span> {voteAverage}
+            /10
+          </p>
+          <p className="detail-of-movie">
+            <span className="label-heading">Votes: </span> {voteCount * 100}
+          </p>
+          <p className="status details-of-movie">
+            {status === 'Released' && (
+              <>
+                <span className="label-heading">Release Date: </span>
+                {releaseDate}
+              </>
+            )}
+            {status !== 'Released' && 'Movie not Released yet'}
+          </p>
+          <p className="detail-of-movie">
+            <span className="label-heading">Budget:</span>{' '}
+            {budget === 0 ? '--' : budget * 100}
+          </p>
+          <p className="detail-of-movie">
+            <span className="label-heading">Collection:</span>{' '}
+            {revenue === 0 ? '--' : revenue * 100}
+          </p>
+          <p className="detail-of-movie">
+            <span className="label-heading">Runtime:</span> {runtime} min
+          </p>
+          <p className="detail-of-movie">
+            <span className="label-heading">Origin Country:</span>{' '}
+            {originCountry.join(', ')}
+          </p>
+          <p className="detail-of-movie production-country">
+            <span className="label-heading">Production Country:</span>{' '}
+            {productionCountries.map(e => e.name).join(', ')}
+          </p>
+
+          <ul className="production-companies-container">
+            <h3 className="production-companies-heading">
+              Production Companies:
+            </h3>
+            {productionCompanies.map(ele => (
+              <li key={ele.id}>
+                <img
+                  src={imgUrl.concat(ele.logo_path)}
+                  alt={ele.name}
+                  className="companies-logo"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
     return (
-      <div className="movie-details-container">
+      <div
+        className="header-backdrop"
+        style={{backgroundImage: `url(${bgUrl})`}}
+      >
         <div
-          className="header-backdrop"
-          style={{backgroundImage: `url(${bgUrl})`}}
+          className="movie-header-details"
+          style={deviceWidth < 768 ? {backgroundImage: `url(${bgUrl})`} : {}}
         >
-          <div className="movie-header-details">
-            <div>
-              <h1 className="movie-title">{title}</h1>
-              <p className="tag-name">{tagline}</p>
-            </div>
-            <div className="movie-popular-container">
-              <p className="detail-of-movie">
-                <span className="label-heading">Rating:</span> {voteAverage}
-                /10
-              </p>
-              <p className="detail-of-movie">
-                <span className="label-heading">Votes: </span> {voteCount * 100}
-              </p>
-              <p className="status details-of-movie">
-                {status === 'Released' && (
-                  <>
-                    <span className="label-heading">Release Date: </span>
-                    {releaseDate}
-                  </>
-                )}
-                {status !== 'Released' && 'Movie not Released yet'}
-              </p>
-              <p className="detail-of-movie">
-                <span className="label-heading">Budget:</span>{' '}
-                {budget === 0 ? '--' : budget * 100}
-              </p>
-              <p className="detail-of-movie">
-                <span className="label-heading">Collection:</span>{' '}
-                {revenue === 0 ? '--' : revenue * 100}
-              </p>
-              <p className="detail-of-movie">
-                <span className="label-heading">Runtime:</span> {runtime} min
-              </p>
-              <p className="detail-of-movie">
-                <span className="label-heading">Origin Country:</span>{' '}
-                {originCountry.join(', ')}
-              </p>
-              <p className="detail-of-movie production-country">
-                <span className="label-heading">Production Country:</span>{' '}
-                {productionCountries.map(e => e.name).join(', ')}
-              </p>
-
-              <ul className="production-companies-container">
-                <h3 className="production-companies-heading">
-                  Production Companies:
-                </h3>
-                {productionCompanies.map(ele => (
-                  <li key={ele.id}>
-                    <img
-                      src={imgUrl.concat(ele.logo_path)}
-                      alt={ele.name}
-                      className="companies-logo"
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="title-holder">
+            <h1 className="movie-title">{title}</h1>
+            <p className="tag-name">{tagline}</p>
           </div>
-          <div className="movie-details-main-content">
-            <img
-              src={imgUrl.concat(posterPath)}
-              alt={title}
-              className="movie-poster-image"
-            />
-            <div className="movie-description-container">
-              <h1 className="original-title">{originalTitle}</h1>
-              <p className="movie-description">{overview}</p>
-              <ul className="genre-container">
-                {genres.map(ele => (
-                  <li key={ele.id} className="genre-tag-items">
-                    {ele.name}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={`https://www.imdb.com/title/${imdbId}/`}
-                target="_blank"
-                className="anchor"
-                rel="noopener noreferrer"
-              >
-                Click here for IMDB rating
-              </a>
-
-              <div className="cast-crew-main-container">
-                <h3 className="cast-heading">Cast & Crew</h3>
-                {castDetailsList.length > 0 && (
-                  <ul className="cast-items-container">
-                    {castDetailsList.map(item => (
-                      <CastDetails
-                        key={item.id}
-                        castDetails={formateObj(item)}
-                      />
-                    ))}
-                    {castDetailsList.length === 0 && (
-                      <div className="cast-items-container">
-                        <p>No Cast and Crew has listed ...</p>
-                      </div>
-                    )}
-                  </ul>
-                )}
-              </div>
+          <MovieDetailsContainer addClass="desktop-view" />
+        </div>
+        <div className="movie-details-main-content">
+          <img
+            src={imgUrl.concat(posterPath)}
+            alt={title}
+            className="movie-poster-image"
+          />
+          <div className="movie-description-container">
+            <h1 className="original-title">{originalTitle}</h1>
+            <p className="movie-description">{overview}</p>
+            <ul className="genre-container">
+              {genres.map(ele => (
+                <li key={ele.id} className="genre-tag-items">
+                  {ele.name}
+                </li>
+              ))}
+            </ul>
+            <a
+              href={`https://www.imdb.com/title/${imdbId}/`}
+              target="_blank"
+              className="anchor"
+              rel="noopener noreferrer"
+            >
+              Click here for IMDB rating
+            </a>
+            <MovieDetailsContainer addClass="mobile-view" />
+            <div className="cast-crew-main-container">
+              <h3 className="cast-heading">Cast & Crew</h3>
+              {castDetailsList.length > 0 && (
+                <ul className="cast-items-container">
+                  {castDetailsList.map(item => (
+                    <CastDetails key={item.id} castDetails={formateObj(item)} />
+                  ))}
+                  {castDetailsList.length === 0 && (
+                    <div className="cast-items-container">
+                      <p>No Cast and Crew has listed ...</p>
+                    </div>
+                  )}
+                </ul>
+              )}
             </div>
           </div>
         </div>

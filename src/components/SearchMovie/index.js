@@ -1,5 +1,6 @@
 import {useState, useContext, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {IoMdSearch} from 'react-icons/io'
 import formateObj from '../../snakeToCamelCase'
 import Apicontext from '../../apiContext'
 import Loader from '../Loader'
@@ -61,7 +62,7 @@ export default () => {
             className="search-bar"
           />
           <button className="search-button" type="submit">
-            Search
+            <IoMdSearch size={25} />
           </button>
         </div>
       </form>
@@ -76,6 +77,8 @@ export default () => {
             {pageCount > 1 && (
               <button
                 className="page-count-buttons"
+                type="button"
+                aria-label="pre page"
                 onClick={() => {
                   setPageCount(ps => {
                     if (ps === 1) {
@@ -91,6 +94,8 @@ export default () => {
             <p className="page-count">{pageCount}</p>
             <button
               className="page-count-buttons"
+              type="button"
+              aria-label="next page"
               onClick={() => {
                 setPageCount(ps => ps + 1)
               }}
