@@ -1,6 +1,5 @@
 import {useLocation} from 'react-router-dom'
 import {useContext, useState, useEffect} from 'react'
-import StarRating from '../StarRating'
 import Apicontext from '../../apiContext'
 import CastDetails from '../CastDetails'
 import Loader from '../Loader'
