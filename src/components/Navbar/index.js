@@ -15,7 +15,9 @@ function Navbar() {
   return (
     <div className="nav-main-container">
       <div className="header">
-        <Link to="/"><h1 className="nav-heading">movieDB</h1></Link>
+        <Link to="/">
+          <h1 className="nav-heading">movieDB</h1>
+        </Link>
         <ul className="nav-items-container">
           <Link to="/search">
             <li className="nav-list-item">
