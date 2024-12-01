@@ -5,7 +5,7 @@ import StarRating from '../StarRating'
 import './index.css'
 
 function Poster({obj, navigate}) {
-  const {posterPath, originalTitle, voteAverage, id, backdropPath} = obj
+  const {posterPath, originalTitle, voteAverage, id} = obj
   const [isLoad, setLoadValue] = useState(true)
   // const [deviceWidth, setDeviceWidth] = useState(window.innerWidth)
   const {imgUrl} = useContext(Apicontext)

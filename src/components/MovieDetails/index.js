@@ -1,6 +1,5 @@
 import {useLocation} from 'react-router-dom'
 import {useContext, useState, useEffect} from 'react'
-import StarRating from '../StarRating'
 import Apicontext from '../../apiContext'
 import CastDetails from '../CastDetails'
 import Loader from '../Loader'
@@ -27,7 +26,7 @@ export default () => {
   const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
   console.log(url)
 
-  async function fetchData() {
+  const fetchData = async () => {
     setPageState(pageStateList[0])
     try {
       const response = await fetch(url)
